@@ -3,6 +3,9 @@ const app = express()
 const { urlencoded } = require("body-parser")
 const connection = require("./database/database")
 
+const categoriesController = require("./categories/CategoriesController")
+const articlesController = require("./articles/ArticlesController")
+
 // View engine
 app.set('view engine','ejs')
 
@@ -19,6 +22,12 @@ connection.authenticate().then(() => {
 }).catch((error) => {
     console.log(error)
 })
+
+// Route CategoriesController
+app.use("/",categoriesController)
+
+// Route ArticlesController
+app.use("/",articlesController)
 
 // Route
 app.get("/",(req,res) => {
