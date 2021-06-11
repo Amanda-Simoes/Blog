@@ -11,4 +11,6 @@ const Category = connection.define('categories',{
     }
 })
 
+Category.sync({force: false}) // Sincronizando com o banco
+
 module.exports = Category
