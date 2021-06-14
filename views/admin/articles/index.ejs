@@ -22,11 +22,20 @@
             </thead>
             <tbody>
                 <% articles.forEach(article => { %>
-                    <td><%= article.id %></td>
-                    <td><%= article.title %></td>
-                    <td><%= article.slug %></td>
-                    <td><%= article.category.title %></td>
-                    <td>Ações</td>
+                    <tr>
+                        <td><%= article.id %></td>
+                        <td><%= article.title %></td>
+                        <td><%= article.slug %></td>
+                        <td><%= article.category.title %></td>
+                        <td>
+                            <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning">Editar</a>
+
+                            <form method="POST" action="/articles/delete" style="display: inline;" onsubmit="confirmDeletion(event, this)">
+                                <input type="hidden" name="id" value="<%= article.id %>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
                 <% }) %>
             </tbody>
         </table>
@@ -39,7 +48,7 @@
 <script>
     function confirmDeletion(event, form){
         event.preventDefault()
-        var decision = confirm("Deseja deletar essa categoria?")
+        var decision = confirm("Deseja deletar este Artigo?")
         if(decision){
             form.submit()
         }
